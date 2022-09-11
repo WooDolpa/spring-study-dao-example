@@ -13,9 +13,8 @@ import java.sql.*;
 public class UserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Class.forName("org.mariadb.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mariadb://19341.synology.me:3306/springbook",
-                "jwlee", "Epsltm1124!");
+
+        Connection c = getConnection();
 
         PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
         ps.setString(1, user.getId());
@@ -30,9 +29,7 @@ public class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Class.forName("org.mariadb.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mariadb://19341.synology.me:3306/springbook",
-                "jwlee", "Epsltm1124!");
+        Connection c = getConnection();
 
         PreparedStatement  ps = c.prepareStatement("select * from users where id = ?");
         ps.setString(1, id);
@@ -49,6 +46,20 @@ public class UserDao {
         c.close();
 
         return user;
+    }
+
+    /**
+     * 중복 코드 메소드로 추출
+     *
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("org.mariadb.jdbc.Driver");
+        Connection c = DriverManager.getConnection("jdbc:mariadb://19341.synology.me:3306/springbook",
+                "jwlee", "Epsltm1124!");
+        return c;
     }
 
 }
