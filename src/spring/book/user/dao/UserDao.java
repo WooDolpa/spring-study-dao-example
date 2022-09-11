@@ -10,7 +10,7 @@ import java.sql.*;
  * user : jwlee
  * date : 2022/09/11
  */
-public class UserDao {
+public abstract class UserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -49,17 +49,13 @@ public class UserDao {
     }
 
     /**
-     * 중복 코드 메소드로 추출
+     * 구현코드는 제거되고 추상 메소드로 바뀌었다.
+     * 메소드의 구현은 서브클래스가 담당
      *
      * @return
      * @throws ClassNotFoundException
      * @throws SQLException
      */
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.mariadb.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mariadb://19341.synology.me:3306/springbook",
-                "jwlee", "Epsltm1124!");
-        return c;
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 }

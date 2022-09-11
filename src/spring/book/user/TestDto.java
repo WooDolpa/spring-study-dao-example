@@ -1,5 +1,6 @@
 package spring.book.user;
 
+import spring.book.user.dao.NUserDao;
 import spring.book.user.dao.UserDao;
 import spring.book.user.domain.User;
 
@@ -15,7 +16,7 @@ public class TestDto {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-        UserDao dao = new UserDao();
+        NUserDao dao = new NUserDao();
 
         User user = new User();
         user.setId("jwlee");
